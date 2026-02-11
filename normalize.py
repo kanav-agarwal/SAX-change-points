@@ -36,7 +36,7 @@ selected = ['CO(GT)', 'NO2(GT)', 'C6H6(GT)']
 data_selected = df[['Date_Time'] + selected].copy()
 
 # Impute missing values using mean strategy
-imputer = SimpleImputer(strategy='mean')
+imputer = SimpleImputer(missing_values=-200, strategy='mean')
 imputed_values = imputer.fit_transform(data_selected[selected])
 data_imputed = pd.DataFrame(imputed_values, columns=selected)
 data_imputed['Date_Time'] = data_selected['Date_Time'].values

@@ -52,9 +52,9 @@ for col in selected:
         #     continue
 
         # Skip if SAX found nothing
-        if cp_sax == 0:
-            binseg_change_points[col][delta] = []
-            continue
+        # if cp_sax == 0:
+        #     binseg_change_points[col][delta] = []
+        #     continue
 
         # Cap breakpoints to something sane
         max_bkps = L // 5
