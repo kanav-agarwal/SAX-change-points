@@ -22,6 +22,12 @@ change_points_counts = (
     .to_dict()
 )
 
+
+# Determine time range for plotting change points
+time_min = data['Date_Time'].min()
+time_max = data['Date_Time'].max()
+padding = (time_max - time_min) * 0.02  # 2% padding
+
 # ==============================================================================
 # Detect Change Points using Ruptures (Dynp Algorithm)
 # ==============================================================================
@@ -85,6 +91,7 @@ for col in selected:
             color='red'
         )
         plt.title(f"Ruptures Dynp Change Points - {col} (delta={delta})")
+        plt.xlim(time_min - padding, time_max + padding) # Add padding to x-axis
         plt.xlabel("Time")
         plt.ylabel("Z-Score")
         plt.legend()

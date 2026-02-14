@@ -32,6 +32,12 @@ change_points_counts = (
     .to_dict()
 )
 
+
+# Determine time range for plotting change points
+time_min = data['Date_Time'].min()
+time_max = data['Date_Time'].max()
+padding = (time_max - time_min) * 0.02  # 2% padding
+
 # -----------------------------
 # Binseg using SAX counts
 # -----------------------------
@@ -51,14 +57,7 @@ for col in selected:
         # if delta != 5:
         #     continue
 
-        # Skip if SAX found nothing
-        # if cp_sax == 0:
-        #     binseg_change_points[col][delta] = []
-        #     continue
-
-        # Cap breakpoints to something sane
-        max_bkps = L // 5
-        n_bkps = min(cp_sax, max_bkps)
+        n_bkps = cp_sax
 
         algo = rpt.Binseg(
             model=model,
@@ -90,6 +89,7 @@ for col in selected:
         )
 
         plt.title(f"Binseg Change Points - {col} (delta={delta})")
+        plt.xlim(time_min - padding, time_max + padding) # Add padding to x-axis
         plt.xlabel("Time")
         plt.ylabel("Z-Score")
         plt.legend()

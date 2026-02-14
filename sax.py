@@ -6,6 +6,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 from pyts.approximation import SymbolicAggregateApproximation
 
+
 selected = ['CO(GT)', 'NO2(GT)', 'C6H6(GT)']
 
 project_root = Path(__file__).parent
@@ -16,6 +17,11 @@ data = pd.read_csv(
 )
 
 scaled_values = data[selected].values
+
+# Determine time range for plotting change points
+time_min = data['Date_Time'].min()
+time_max = data['Date_Time'].max()
+padding = (time_max - time_min) * 0.02  # 2% padding
 
 # ==============================================================================
 # Apply SAX and Plot Results
@@ -48,6 +54,7 @@ for i, col in enumerate(selected):
         zorder=1
     )
     plt.title(f"SAX Symbolic Representation - {col}")
+    plt.xlim(time_min - padding, time_max + padding) # Add padding to x-axis
     plt.xlabel("Time")
     plt.ylabel("Symbol Index")
     plt.yticks(range(8), letters)
@@ -87,6 +94,7 @@ for col, delta_dict in all_change_points.items():
             color='red'
         )
         plt.title(f"SAX Change Points - {col} (delta={delta})")
+        plt.xlim(time_min - padding, time_max + padding) # Add padding to x-axis
         plt.xlabel("Time")
         plt.ylabel("SAX Symbol Index")
         plt.yticks(range(len(letters)), letters)

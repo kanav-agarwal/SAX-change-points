@@ -42,11 +42,17 @@ data_imputed = pd.DataFrame(imputed_values, columns=selected)
 data_imputed['Date_Time'] = data_selected['Date_Time'].values
 data = data_imputed
 
+# Determine time range for plotting change points
+time_min = data['Date_Time'].min()
+time_max = data['Date_Time'].max()
+padding = (time_max - time_min) * 0.02  # 2% padding
+
 # Plot raw time series
 plt.figure(figsize=(12,6))
 for col in selected:
     plt.plot(data['Date_Time'], data[col], label=col)
 plt.title("Raw Time Series")
+plt.xlim(time_min - padding, time_max + padding) # Add padding to x-axis
 plt.xlabel("Time")
 plt.legend()
 plt.tight_layout()
@@ -66,6 +72,7 @@ plt.figure(figsize=(12,6))
 for i,col in enumerate(selected):
     plt.plot(data['Date_Time'], scaled[col], label=col)
 plt.title("Z-Normalized Time Series")
+plt.xlim(time_min - padding, time_max + padding) # Add padding to x-axis
 plt.xlabel("Time")
 plt.legend()
 plt.tight_layout()
