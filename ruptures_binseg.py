@@ -57,7 +57,11 @@ for col in selected:
         # if delta != 5:
         #     continue
 
-        n_bkps = cp_sax
+        # Cap breakpoints to something sane
+        max_bkps = L // 3
+        n_bkps = min(cp_sax, max_bkps)
+        if(n_bkps == max_bkps):
+            print(max_bkps, cp_sax, col, delta)
 
         algo = rpt.Binseg(
             model=model,
