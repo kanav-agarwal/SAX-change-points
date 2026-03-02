@@ -1,4 +1,4 @@
 .venv/*
 .vscode/*
 __pycache__/
-HVAC-dataset/Public_ScientificData_AHUFaults*
+HVAC-dataset/Public_ScientificData_AHUFaults/
