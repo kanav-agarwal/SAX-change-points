@@ -1,0 +1,9 @@
+variable,index,time_s,sax_before,sax_after,symbol_before,symbol_after,symbol_jump
+AHU Mixed Air Temperature (°K),1,300.0,1,0,b,a,1
+AHU Mixed Air Temperature (°K),37,11100.0,0,1,a,b,1
+AHU Mixed Air Temperature (°K),85,25500.0,1,0,b,a,1
+AHU Mixed Air Temperature (°K),149,44700.0,0,1,a,b,1
+AHU Mixed Air Temperature (°K),162,48600.0,1,0,b,a,1
+AHU Mixed Air Temperature (°K),165,49500.0,0,1,a,b,1
+AHU Mixed Air Temperature (°K),219,65700.0,1,0,b,a,1
+AHU Mixed Air Temperature (°K),262,78600.0,0,1,a,b,1

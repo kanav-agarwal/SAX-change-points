@@ -37,7 +37,7 @@ padding = (time_max - time_min) * 0.02
 # ==============================================================================
 
 sax = SymbolicAggregateApproximation(
-    n_bins=8,
+    n_bins=2,
     strategy="quantile"
 )
 
@@ -67,10 +67,10 @@ plt.step(
 plt.title("SAX Symbolic Representation - AHU Mixed Air Temperature")
 plt.xlabel("Time (s)")
 plt.ylabel("Symbol Index")
-plt.yticks(range(8), letters)
+plt.yticks(range(2), letters)
 plt.xlim(time_min - padding, time_max + padding)
 plt.tight_layout()
-plt.savefig(project_root / "figures" / "sax_transformed" / "mixed_air_temp.png")
+plt.savefig(project_root / "figures" / "sax_transformed" / "mixed_air_temp_2bins.png")
 plt.close()
 
 # ==============================================================================
@@ -82,7 +82,7 @@ letters = list(string.ascii_lowercase[:sax.n_bins])
 
 change_point_records = []
 
-for delta in range(1, 8):
+for delta in range(1, 2):
 
     cp_indices = np.where(np.abs(np.diff(series)) >= delta)[0] + 1
 
@@ -118,7 +118,7 @@ for delta in range(1, 8):
     plt.xlim(time_min - padding, time_max + padding)
     plt.legend()
     plt.tight_layout()
-    plt.savefig(save_dir / f"delta_{delta}.png")
+    plt.savefig(save_dir / f"2bins_delta_{delta}.png")
     plt.close()
 
 # ==============================================================================
@@ -128,7 +128,7 @@ for delta in range(1, 8):
 cp_df = pd.DataFrame(change_point_records)
 
 cp_df.to_csv(
-    project_root / "processed" / "mixed_air_temp_change_points_detailed.csv",
+    project_root / "processed" / "mixed_air_temp_change_points_2bins.csv",
     index=False
 )
 
