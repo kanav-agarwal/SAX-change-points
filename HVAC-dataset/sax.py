@@ -104,21 +104,32 @@ for delta in range(1, 2):
     save_dir = project_root / "figures" / "sax_change_points"
 
     plt.figure(figsize=(12, 6))
-    plt.scatter(
-        data[time_col].iloc[cp_indices],
-        numeric_sax[cp_indices, 0],
-        color="red",
-        label=f"delta = {delta}"
+
+    # Plot z-normalized signal
+    plt.plot(
+        data[time_col],
+        data[temp_col],
+        label="Z-Normalized Temperature",
+        zorder=1
     )
 
-    plt.title(f"SAX Change Points - AHU Mixed Air Temperature (delta={delta})")
+    # Overlay change points
+    plt.scatter(
+        data[time_col].iloc[cp_indices],
+        data[temp_col].iloc[cp_indices],
+        color="red",
+        label=f"Change Points (delta={delta})",
+        zorder=2
+    )
+
+    plt.title(f"SAX Change Points on Z-Normalized Data - AHU Mixed Air Temperature (delta={delta})")
     plt.xlabel("Time (s)")
-    plt.ylabel("SAX Symbol Index")
-    plt.yticks(range(len(letters)), letters)
+    plt.ylabel("Z-Normalized Value")
     plt.xlim(time_min - padding, time_max + padding)
     plt.legend()
     plt.tight_layout()
-    plt.savefig(save_dir / f"2bins_delta_{delta}.png")
+
+    plt.savefig(save_dir / f"2bins_delta_{delta}_znormalized.png")
     plt.close()
 
 # ==============================================================================
