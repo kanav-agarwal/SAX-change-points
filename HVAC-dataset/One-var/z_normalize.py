@@ -11,7 +11,7 @@ from sklearn.impute import SimpleImputer
 project_root = Path(__file__).parent
 
 # Load CSV (standard comma-separated)
-df = pd.read_csv(project_root / "Public_ScientificData_AHUFaults" / "08_G36-HIL" / "BaselineSystem.csv")
+df = pd.read_csv(project_root.parent / "Public_ScientificData_AHUFaults" / "08_G36-HIL" / "BaselineSystem.csv")
 
 # Clean column names (remove accidental whitespace)
 df.columns = df.columns.str.strip()
