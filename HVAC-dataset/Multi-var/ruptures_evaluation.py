@@ -106,7 +106,7 @@ for var in variables:
                  .replace("|", "")
                  .replace('"', "")
                  .lower())
-    cp_file = project_root / "processed" / "sax_change_points" / f"change_points_{filename}_4bins.csv"
+    cp_file = project_root / "processed" / "ruptures_change_points" / f"change_points_{filename}_ruptures.csv"
 
     try:
         cp_df = pd.read_csv(cp_file)
@@ -141,7 +141,7 @@ for var in variables:
 results_df = pd.DataFrame(results)
 
 results_df.to_csv(
-    project_root / "processed" / "sax_delta1_evaluation.csv",
+    project_root / "processed" / "ruptures_evaluation.csv",
     index=False
 )
 
